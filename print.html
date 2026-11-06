@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Daisy - Printable Surprise</title>
+  <style>
+    :root {
+      --rose: #d94f83;
+      --rose-deep: #9f315e;
+      --ink: #2f1e2b;
+      --muted: #6f5866;
+      --paper: #fffafc;
+      --panel: rgba(255,255,255,0.96);
+      --shadow: rgba(100, 42, 69, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: linear-gradient(135deg, #fdf2f7 0%, #f7dfe9 45%, #f4d5e3 100%);
+      color: var(--ink);
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      padding: 34px 18px;
+    }
+
+    .page {
+      position: relative;
+      width: min(760px, 100%);
+      background: var(--panel);
+      border: 1px solid rgba(196, 119, 154, 0.2);
+      border-radius: 28px;
+      box-shadow: 0 30px 80px var(--shadow);
+      padding: 34px 26px 22px;
+      overflow: hidden;
+    }
+
+    .page::before,
+    .page::after {
+      content: "✦";
+      position: absolute;
+      color: rgba(185, 78, 125, 0.45);
+      font-size: 26px;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .page::before { top: 20px; left: 30px; }
+    .page::after { right: 30px; bottom: 20px; animation-delay: .9s; }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.4; transform: scale(1) rotate(0); }
+      50% { opacity: 1; transform: scale(1.15) rotate(18deg); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      color: var(--rose-deep);
+    }
+
+    .subtitle {
+      margin: 14px auto 0;
+      max-width: 580px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .heart {
+      margin: 14px 0 10px;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    .section {
+      margin-top: 20px;
+      padding: 20px 20px 18px;
+      background: #fff6fa;
+      border-left: 5px solid var(--rose);
+      border-radius: 14px;
+    }
+
+    .section p {
+      margin: 0 0 14px;
+      color: #4b3b44;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .highlight {
+      color: #c33f72;
+      font-weight: 700;
+    }
+
+    .memory-box {
+      margin: 24px auto 0;
+      width: min(400px, 100%);
+      aspect-ratio: 4/3;
+      border: 7px solid white;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #ffe9f2, #fff8ea);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(137,73,99,0.12);
+      text-align: center;
+      color: #9d5974;
+      font-weight: 700;
+    }
+
+    .memory-box .icon {
+      display: block;
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+
+    .note {
+      margin-top: 22px;
+      padding: 18px 16px;
+      border-radius: 16px;
+      color: #873756;
+      background: #ffe6ef;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.08rem;
+    }
+
+    .signature {
+      margin-top: 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+
+    .bottom-dots {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--rose);
+      letter-spacing: 0.5em;
+      font-size: 1.1rem;
+    }
+
+    @media print {
+      html, body {
+        background: #fff;
+      }
+      body {
+        padding: 0;
+      }
+      .page {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        width: 100%;
+        min-height: 100vh;
+      }
+      .page::before, .page::after {
+        display: none;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 12mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Printable romantic surprise for Daisy">
+    <div class="header">
+      <p class="eyebrow">A little something ✨</p>
+      <h1>For Daisy Magar</h1>
+      <p class="subtitle">A little note for someone who makes ordinary days feel brighter and love feel easier to hold.</p>
+    </div>
+
+    <div class="heart" aria-label="Heart">💖</div>
+
+    <section class="section">
+      <p>Hi Daisy,</p>
+      <p>I wanted to make you a little surprise, because getting to know you has made me smile more than I expected.</p>
+      <p>Your kindness, your energy, and the way you make even simple moments feel special mean a lot to me.</p>
+      <p>We’re still at the beginning of our story, and I don’t want to rush it. I’m just really happy we found each other, and I’m excited to make more lovely memories together. <span class="highlight">You’re someone special to me.</span></p>
+    </section>
+
+    <div class="memory-box" aria-label="memory placeholder">
+      <div>
+        <span class="icon">🌸</span>
+        A favorite photo with Daisy
+      </div>
+    </div>
+
+    <div class="note">I hope this little surprise makes you smile today 💕</div>
+
+    <section class="section">
+      <p>Daisy, I’m glad you’re part of my life.</p>
+      <p>I hope this little surprise reminds you that you’re appreciated. Keep being your lovely self, and let’s take our story one happy moment at a time. ✨</p>
+    </section>
+
+    <div class="signature">With lots of affection, just for you 💗</div>
+    <div class="bottom-dots">✦ ✦ ✦</div>
+  </main>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => window.print(), 400);
+    });
+  </script>
+</body>
+</html>
