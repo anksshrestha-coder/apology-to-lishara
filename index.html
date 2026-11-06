@@ -4,24 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#fff6f7" />
-  <title>A little surprise for Daisy 💐</title>
+  <title>For Daisy Magar 💐</title>
   <style>
     :root {
-      color-scheme: light;
       --rose: #d94f83;
       --deep-rose: #9f315e;
       --ink: #493743;
       --muted: #806a75;
+      --page-bg: #fffafc;
     }
 
     * { box-sizing: border-box; }
 
-    body {
+    html, body {
       margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100%;
+      background: #fff7fa;
+      font-family: Arial, sans-serif;
       color: var(--ink);
-      background: radial-gradient(ellipse at top, #fff 0%, #fff8f5 45%, #ffe8ee 100%);
+    }
+
+    body {
+      min-height: 100vh;
       overflow-x: hidden;
     }
 
@@ -29,90 +33,101 @@
 
     .intro {
       position: fixed;
-      z-index: 5;
       inset: 0;
+      z-index: 50;
       display: grid;
       place-items: center;
       padding: 22px;
-      background: radial-gradient(ellipse at 50% 35%, #fffefa 0%, #fff6f1 57%, #f9dfe9 100%);
-      transition: opacity .9s ease, visibility .9s ease;
+      background: radial-gradient(circle at 50% 20%, #fffefa 0%, #fff4f1 42%, #f6e1ec 100%);
+      transition: opacity 0.9s ease, visibility 0.9s ease;
     }
 
-    .intro.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+    .intro.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
     .intro-card {
       position: relative;
       width: min(440px, 100%);
       min-height: 540px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(208,133,153,0.2);
+      border-radius: 30px;
+      box-shadow: 0 25px 70px rgba(151,81,107,0.16);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 34px 24px 28px;
-      overflow: hidden;
-      border: 1px solid rgba(208, 133, 153, .2);
-      border-radius: 30px;
-      background: rgba(255, 255, 255, .8);
-      box-shadow: 0 25px 70px rgba(151, 81, 107, .16);
       text-align: center;
+      padding: 30px 20px 24px;
     }
 
     .intro-card::before, .intro-card::after {
-      content: '✦';
+      content: "✦";
       position: absolute;
-      color: #e8a4bd;
+      color: rgba(216, 116, 160, 0.8);
       font-size: 24px;
       animation: twinkle 2.2s ease-in-out infinite;
     }
 
-    .intro-card::before { top: 48px; left: 34px; }
-    .intro-card::after { right: 38px; bottom: 106px; animation-delay: .8s; }
+    .intro-card::before { top: 32px; left: 30px; }
+    .intro-card::after { right: 32px; bottom: 112px; animation-delay: .9s; }
 
-    @keyframes twinkle { 50% { opacity: .35; transform: scale(.75) rotate(25deg); } }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.5; transform: scale(1) rotate(0); }
+      50% { opacity: 1; transform: scale(1.2) rotate(18deg); }
+    }
 
     .eyebrow {
+      margin: 0 0 14px;
       color: var(--rose);
-      font: italic 600 1rem/1.3 Georgia, serif;
+      font-style: italic;
       letter-spacing: .08em;
-      margin: 0 0 12px;
+      font-size: 1rem;
     }
 
-    .intro h1 {
-      max-width: 360px;
+    .intro-title {
       margin: 0;
-      color: #29222a;
-      font-size: clamp(2.45rem, 11vw, 3.6rem);
-      line-height: 1.05;
-      letter-spacing: -.045em;
+      font-size: clamp(2.5rem, 8vw, 3.8rem);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      color: #1d171b;
     }
 
-    .intro h1 span { color: var(--rose); }
-    .intro-copy { margin: 14px 0 14px; color: #74636b; font: 1rem/1.5 Arial, sans-serif; }
+    .intro-title .highlight { color: var(--rose); }
 
-    .gift-art {
+    .intro-sub {
+      margin: 14px 0 18px;
+      color: #73636c;
+      font-size: 0.98rem;
+    }
+
+    .gift-scene {
       position: relative;
       width: 250px;
-      height: 190px;
-      margin: 0 auto 10px;
-      display: grid;
-      place-items: end center;
-      perspective: 700px;
+      height: 180px;
+      margin: 0 auto 16px;
     }
 
     .envelope {
       position: absolute;
-      z-index: 2;
+      left: 50%;
       bottom: 10px;
       width: 205px;
       height: 118px;
-      border-radius: 10px 10px 15px 15px;
+      transform: translateX(-50%);
       background: linear-gradient(145deg, #f8dcb9, #ffedcf 60%, #ecc89f);
-      box-shadow: 0 14px 24px rgba(142, 91, 67, .17);
+      border-radius: 12px;
+      box-shadow: 0 14px 24px rgba(142,91,67,0.17);
+      z-index: 2;
     }
 
     .envelope-front {
       position: absolute;
-      z-index: 4;
       inset: 0;
       border-radius: inherit;
       background: linear-gradient(145deg, #f8dcb9, #f5d2a9);
@@ -121,7 +136,6 @@
 
     .envelope-flap {
       position: absolute;
-      z-index: 5;
       left: 0;
       top: 0;
       width: 100%;
@@ -129,251 +143,448 @@
       background: linear-gradient(145deg, #ffedcf, #edc99d);
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top center;
-      transition: transform .75s ease;
-      backface-visibility: hidden;
+      transition: transform 0.75s ease;
+      z-index: 5;
     }
 
     .envelope-seal {
       position: absolute;
-      z-index: 6;
       left: 50%;
       top: 47%;
-      width: 44px;
-      height: 44px;
+      transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      border: 3px solid #f7cada;
-      border-radius: 50%;
       background: linear-gradient(145deg, #ef8cae, #c94d7a);
+      border: 3px solid rgba(255,255,255,0.7);
+      box-shadow: 0 4px 10px rgba(151,54,91,0.25);
       color: white;
-      font: 1.35rem Arial, sans-serif;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 4px 10px rgba(151, 54, 91, .25);
+      font-size: 1.2rem;
+      z-index: 6;
       transition: opacity .25s ease;
     }
 
     .letter-card {
       position: absolute;
-      z-index: 1;
-      bottom: 28px;
       left: 50%;
-      width: 172px;
-      height: 128px;
-      padding: 18px 10px;
+      bottom: 26px;
+      width: 170px;
+      height: 126px;
+      transform: translateX(-50%);
+      padding: 16px 10px;
+      background: repeating-linear-gradient(white 0 21px, #f8e9ed 22px 23px);
       border: 1px solid #f0d7dc;
       border-radius: 8px;
-      background: repeating-linear-gradient(white 0 21px, #f8e9ed 22px 23px);
+      box-shadow: 0 5px 12px rgba(95,55,69,0.14);
       color: #8d4765;
-      box-shadow: 0 5px 12px rgba(95, 55, 69, .14);
-      transform: translateX(-50%);
-      transition: transform .85s cubic-bezier(.2,.8,.25,1), z-index 0s .4s;
+      transition: transform 0.85s cubic-bezier(.2,.8,.25,1), z-index 0s .4s;
     }
 
-    .letter-card small { display: block; font: italic .72rem Arial, sans-serif; color: #9b7282; }
-    .letter-card strong { display: block; margin-top: 8px; font-size: 1.45rem; color: var(--rose); }
-    .letter-card .mini-heart { margin-top: 4px; font: 1.1rem Arial, sans-serif; }
+    .letter-card small {
+      display: block;
+      font: italic 0.7rem Arial, sans-serif;
+      color: #9b7282;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .letter-card b {
+      display: block;
+      margin-top: 8px;
+      color: var(--rose);
+      font-size: 1.45rem;
+    }
+
+    .letter-card .mini-heart {
+      margin-top: 6px;
+      font-size: 1.05rem;
+    }
 
     .bouquet-pop {
       position: absolute;
-      z-index: 3;
-      bottom: 79px;
       left: 50%;
-      font: 5rem/1 Arial, sans-serif;
+      bottom: 72px;
+      transform: translateX(-50%) scale(0.25);
       opacity: 0;
-      transform: translate(-50%, 35px) scale(.25);
-      transform-origin: bottom center;
-      filter: drop-shadow(0 8px 7px rgba(122, 76, 80, .2));
+      font-size: 88px;
+      filter: drop-shadow(0 8px 7px rgba(122,76,80,0.18));
+      z-index: 3;
     }
 
-    .intro.is-opening .envelope-flap { transform: rotateX(180deg); }
-    .intro.is-opening .envelope-seal { opacity: 0; }
-    .intro.is-opening .letter-card { z-index: 3; transform: translate(-50%, -85px) rotate(-4deg); }
-    .intro.is-opening .bouquet-pop { animation: flowerBloom 1.15s .85s cubic-bezier(.2,.8,.25,1) forwards; }
+    .intro.opening .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .intro.opening .envelope-seal {
+      opacity: 0;
+    }
+
+    .intro.opening .letter-card {
+      transform: translateX(-50%) translateY(-85px) rotate(-4deg);
+      z-index: 3;
+    }
+
+    .intro.opening .bouquet-pop {
+      animation: flowerBloom 1.2s .8s cubic-bezier(.2,.8,.25,1) forwards;
+    }
 
     @keyframes flowerBloom {
-      0% { opacity: 0; transform: translate(-50%, 35px) scale(.25) rotate(-14deg); }
-      65% { opacity: 1; transform: translate(-50%, -15px) scale(1.13) rotate(7deg); }
-      82% { transform: translate(-50%, 5px) scale(.96) rotate(-3deg); }
-      100% { opacity: 1; transform: translate(-50%, 0) scale(1) rotate(0); }
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.2) rotate(-14deg);
+      }
+      65% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.12) rotate(8deg);
+      }
+      82% {
+        transform: translateX(-50%) scale(0.97) rotate(-3deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) rotate(0deg);
+      }
     }
 
     .open-button, .nav-button {
       position: relative;
       z-index: 7;
-      border: 0;
+      border: none;
       border-radius: 999px;
       padding: 14px 23px;
-      color: #fff;
+      color: white;
       background: linear-gradient(135deg, #e879a2, #b84d7d);
-      box-shadow: 0 10px 24px rgba(184, 77, 125, .24);
-      font: 700 1rem Arial, sans-serif;
+      box-shadow: 0 12px 26px rgba(184,77,125,0.26);
       cursor: pointer;
+      font-weight: 700;
       transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
     }
 
-    .open-button:hover, .nav-button:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(184, 77, 125, .32); }
-    .open-button:focus-visible, .nav-button:focus-visible, .upload-label:focus-within { outline: 3px solid #672947; outline-offset: 4px; }
-    .intro.is-opening .open-button { opacity: 0; pointer-events: none; }
+    .open-button:hover, .nav-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(184,77,125,0.32);
+    }
 
-    .main-content {
-      width: min(720px, calc(100% - 32px));
-      margin: 38px auto;
-      padding: clamp(25px, 6vw, 48px);
-      border: 1px solid rgba(214, 143, 166, .22);
+    .intro.opening .open-button {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .surprise {
+      width: min(760px, calc(100% - 32px));
+      margin: 26px auto 42px;
+      padding: clamp(20px, 5vw, 40px);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(214,143,166,0.22);
       border-radius: 28px;
-      background: rgba(255, 255, 255, .9);
-      box-shadow: 0 24px 70px rgba(137, 73, 99, .14);
+      box-shadow: 0 24px 70px rgba(137,73,99,0.12);
       text-align: center;
       opacity: 0;
       transform: translateY(18px);
-      transition: opacity .9s ease, transform .9s ease;
+      transition: opacity 0.9s ease, transform 0.9s ease;
+      display: none;
     }
 
-    .main-content.is-visible { opacity: 1; transform: translateY(0); }
-    .page { display: none; }
-    .page.is-current { display: block; animation: pageIn .55s ease both; }
+    .surprise.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.current {
+      display: block;
+      animation: pageIn 0.5s ease both;
+    }
 
     @keyframes pageIn {
-      from { opacity: 0; transform: translateY(16px) scale(.99); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .page-count { margin: 0 0 15px; color: #a17b8a; font: 700 .8rem Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-    .main-heart { font: 3.5rem Arial, sans-serif; animation: heartbeat 1.6s ease-in-out infinite; }
-    @keyframes heartbeat { 50% { transform: scale(1.13); } }
-    .main-content h2 { margin: 12px 0 10px; color: var(--deep-rose); font-size: clamp(2rem, 7vw, 3rem); line-height: 1.12; }
-    .subtitle { margin: 0 0 24px; color: var(--muted); font: 600 1rem/1.5 Arial, sans-serif; }
-    .letter { padding: 22px; border-left: 5px solid #e879a2; border-radius: 14px; background: #fff4f7; text-align: left; }
-    .letter p { margin: 0 0 13px; color: #4b3b44; font: 1rem/1.75 Arial, sans-serif; }
-    .letter p:last-child { margin-bottom: 0; }
-    .highlight { color: #c33f72; font-weight: 700; }
-    .love-note { margin: 22px 0; padding: 17px; border-radius: 16px; color: #873756; background: #ffe6ef; font: 700 1.1rem/1.5 Arial, sans-serif; }
-    .bouquet-final { margin: 10px 0 20px; font: 4.5rem/1 Arial, sans-serif; animation: sway 3s ease-in-out infinite; }
-    @keyframes sway { 50% { transform: rotate(5deg) translateY(-5px); } }
-    .signoff { color: #8a6878; font: italic 1rem Arial, sans-serif; }
+    .page-count {
+      margin: 0 0 14px;
+      color: #a17b8a;
+      font: 700 0.75rem Arial, sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
 
-    .memory-frame {
-      width: min(340px, 100%);
+    .heart {
+      font-size: 3.2rem;
+      animation: heartbeat 1.6s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.13); }
+    }
+
+    .main-title {
+      margin: 12px 0 10px;
+      color: var(--deep-rose);
+      font-size: clamp(2rem, 7vw, 3rem);
+      line-height: 1.12;
+    }
+
+    .subtitle {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font: 600 1rem/1.5 Arial, sans-serif;
+    }
+
+    .letter-box {
+      padding: 22px;
+      border-left: 5px solid #e879a2;
+      border-radius: 14px;
+      background: #fff4f7;
+      text-align: left;
+    }
+
+    .letter-box p {
+      margin: 0 0 13px;
+      color: #4b3b44;
+      font: 1rem/1.75 Arial, sans-serif;
+    }
+
+    .letter-box p:last-child { margin-bottom: 0; }
+
+    .highlight {
+      color: #c33f72;
+      font-weight: 700;
+    }
+
+    .love-note {
+      margin: 22px 0 12px;
+      padding: 18px 14px;
+      border-radius: 16px;
+      color: #873756;
+      background: #ffe6ef;
+      font: 700 1.1rem/1.5 Arial, sans-serif;
+    }
+
+    .flower-final {
+      margin: 10px 0 16px;
+      font-size: clamp(3rem, 8vw, 5rem);
+      animation: sway 3s ease-in-out infinite;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-3deg) translateY(0); }
+      50% { transform: rotate(6deg) translateY(-4px); }
+    }
+
+    .signature {
+      color: #8a6878;
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+    .memory-box {
+      width: min(360px, 100%);
       aspect-ratio: 4 / 3;
-      margin: 20px auto 16px;
+      margin: 18px auto 12px;
+      border: 7px solid white;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #ffe9f2, #fff8ea);
       display: grid;
       place-items: center;
+      box-shadow: 0 12px 30px rgba(137,73,99,0.12);
       overflow: hidden;
-      border: 7px solid white;
-      border-radius: 20px;
-      background: linear-gradient(145deg, #ffe5ee, #fff7ed);
-      box-shadow: 0 12px 32px rgba(137, 73, 99, .16);
+      position: relative;
     }
 
-    .memory-frame img { display: none; width: 100%; height: 100%; object-fit: cover; }
-    .memory-frame img.has-photo { display: block; }
-    .memory-placeholder { padding: 20px; color: #a65c7b; font: 1rem/1.6 Arial, sans-serif; }
-    .memory-placeholder span { display: block; margin-bottom: 8px; font: 3rem Arial, sans-serif; }
-    .memory-frame.has-photo .memory-placeholder { display: none; }
+    .memory-box img {
+      display: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .memory-box.has-photo img {
+      display: block;
+    }
+
+    .memory-placeholder {
+      color: #9d5974;
+      font: 1rem/1.6 Arial, sans-serif;
+      text-align: center;
+      padding: 18px;
+    }
+
+    .memory-placeholder span {
+      display: block;
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+
+    .memory-box.has-photo .memory-placeholder {
+      display: none;
+    }
 
     .upload-label {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid #e5afc3;
-      border-radius: 999px;
       padding: 12px 18px;
-      color: #923d62;
+      border-radius: 999px;
       background: #fff7fa;
-      font: 700 .95rem Arial, sans-serif;
+      border: 1px solid #ebc0d3;
+      color: #8c3d63;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .upload-label input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
       cursor: pointer;
     }
 
-    .upload-label input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
-    .privacy-note { max-width: 390px; margin: 12px auto 0; color: #887783; font: .84rem/1.5 Arial, sans-serif; }
+    .upload-note {
+      margin: 12px auto 0;
+      max-width: 420px;
+      color: #86747a;
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
 
-    .page-navigation { display: flex; justify-content: center; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
-    .nav-button.secondary { color: #873756; background: #f8eaf0; box-shadow: none; }
-    .nav-button[hidden] { display: none; }
-    .reply { display: none; margin-top: 18px; padding: 17px; border: 1px solid #a6d9ac; border-radius: 14px; color: #315d3b; background: #effaf0; font: 700 1rem/1.5 Arial, sans-serif; }
-    .reply.is-visible { display: block; animation: pageIn .5s ease both; }
+    .page-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    .nav-button.secondary {
+      color: #873756;
+      background: #f8eaf0;
+      box-shadow: none;
+    }
+
+    .reply {
+      display: none;
+      margin-top: 18px;
+      padding: 17px;
+      border-radius: 12px;
+      border: 1px solid #a6d9ac;
+      background: #effaf0;
+      color: #2d6546;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .reply.show {
+      display: block;
+      animation: reveal 0.5s ease both;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 480px) {
-      .intro-card { min-height: 500px; padding: 28px 18px 24px; }
-      .gift-art { transform: scale(.9); margin-top: -3px; margin-bottom: 4px; }
-      .main-content { margin: 16px auto; }
-      .page-navigation { gap: 9px; }
-      .nav-button { padding: 13px 17px; }
+      .intro-card { min-height: 500px; }
+      .gift-scene { transform: scale(0.9); }
+      .page-nav { gap: 9px; }
+      .nav-button { padding: 12px 16px; }
     }
   </style>
 </head>
 <body>
-  <section class="intro" id="intro" aria-labelledby="introTitle">
+  <div class="intro" id="intro">
     <div class="intro-card">
       <p class="eyebrow">a little something ✨</p>
-      <h1 id="introTitle">There’s something <span>for you</span></h1>
-      <p class="intro-copy">A tiny surprise, made with a lot of care.</p>
-      <div class="gift-art" aria-hidden="true">
+      <h1 class="intro-title">There’s something<br><span class="highlight">for you</span></h1>
+      <p class="intro-sub">A tiny surprise, made with a lot of care.</p>
+
+      <div class="gift-scene" aria-hidden="true">
         <div class="envelope">
-          <div class="letter-card"><small>a little note</small><strong>Daisy</strong><div class="mini-heart">✦ ♡ ✦</div></div>
+          <div class="letter-card">
+            <small>a little note</small>
+            <b>Daisy</b>
+            <div class="mini-heart">✦ ♡ ✦</div>
+          </div>
           <div class="envelope-front"></div>
           <div class="envelope-flap"></div>
           <div class="envelope-seal">♡</div>
         </div>
         <div class="bouquet-pop">💐</div>
       </div>
-      <button class="open-button" id="openButton" type="button">♡ &nbsp; Open your letter ✨</button>
-      <p class="eyebrow" style="margin: 17px 0 0; color: #987b87;">made just for Daisy Magar</p>
-    </div>
-  </section>
 
-  <main class="main-content" id="surprise" aria-live="polite" aria-label="A surprise for Daisy">
-    <section class="page is-current" data-page="0" aria-labelledby="pageOneTitle">
+      <button class="open-button" id="openButton" type="button">♡ Open your letter ✨</button>
+      <p class="eyebrow" style="margin-top: 16px; color: #987b87;">made just for Daisy Magar</p>
+    </div>
+  </div>
+
+  <main class="surprise" id="surprise">
+    <section class="page current" data-page="0">
       <p class="page-count">A little note · 1 of 3</p>
-      <div class="main-heart" aria-hidden="true">💖</div>
-      <h2 id="pageOneTitle">For Daisy Magar 🌷</h2>
+      <div class="heart">💖</div>
+      <h2 class="main-title">For Daisy Magar 🌷</h2>
       <p class="subtitle">A little note for someone who makes ordinary days feel brighter.</p>
-      <div class="letter">
+
+      <div class="letter-box">
         <p>Hi Daisy,</p>
         <p>I wanted to make you a little surprise, because getting to know you has made me smile more than I expected.</p>
         <p>Your kindness, your energy, and the way you make even simple moments feel special mean a lot to me.</p>
         <p>We’re still at the beginning of our story, and I don’t want to rush it. I’m just really happy we found each other, and I’m excited to make more lovely memories together. <span class="highlight">You’re someone special to me.</span></p>
       </div>
+
       <div class="love-note">I hope this little surprise makes you smile today 💕</div>
     </section>
 
-    <section class="page" data-page="1" aria-labelledby="pageTwoTitle" aria-hidden="true">
+    <section class="page" data-page="1">
       <p class="page-count">A favorite memory · 2 of 3</p>
-      <h2 id="pageTwoTitle">A little memory of us 📸</h2>
-      <p class="subtitle">Add a photo you’d like to remember. This preview stays on this device.</p>
-      <div class="memory-frame" id="memoryFrame">
+      <h2 class="main-title">A little memory of us 📸</h2>
+      <p class="subtitle">Add a photo you’d like to remember with Daisy.</p>
+
+      <div class="memory-box" id="memoryBox">
         <div class="memory-placeholder"><span>🌸</span>Your favorite photo can go here</div>
-        <img id="memoryPhoto" alt="Your selected memory with Daisy" />
+        <img id="memoryPhoto" alt="Memory with Daisy" />
       </div>
-      <label class="upload-label" for="photoUpload">Choose a photo 💗
+
+      <label class="upload-label" for="photoUpload">
+        Choose a photo 💗
         <input id="photoUpload" type="file" accept="image/*" />
       </label>
-      <p class="privacy-note">The photo is only previewed in your browser; this page does not upload or save it.</p>
+
+      <p class="upload-note">This preview is local to your browser and does not upload anywhere.</p>
     </section>
 
-    <section class="page" data-page="2" aria-labelledby="pageThreeTitle" aria-hidden="true">
+    <section class="page" data-page="2">
       <p class="page-count">One last thing · 3 of 3</p>
-      <div class="main-heart" aria-hidden="true">💐</div>
-      <h2 id="pageThreeTitle">Here’s to more memories</h2>
-      <p class="subtitle">No big promises—just more laughter, kind moments, and getting to know each other.</p>
-      <div class="letter">
+      <div class="heart">💐</div>
+      <h2 class="main-title">Here’s to more memories</h2>
+      <p class="subtitle">No big promises—just more laughter, sweetness, and us.</p>
+
+      <div class="letter-box">
         <p>Daisy, I’m glad you’re part of my life.</p>
-        <p>I hope this little surprise reminds you that you’re appreciated. Keep being your lovely self, and let’s take our story one happy moment at a time. ✨</p>
+        <p>I hope this little surprise reminds you that you’re appreciated. Keep being your lovely self and let’s take our story one happy moment at a time. ✨</p>
       </div>
-      <div class="bouquet-final" aria-label="A bouquet of flowers">💐</div>
-      <p class="signoff">With lots of affection, just for you 💗</p>
+
+      <div class="flower-final">💐</div>
+      <p class="signature">With lots of affection, just for you 💗</p>
+
       <button class="nav-button" id="smileButton" type="button">A little smile for you 🌸</button>
-      <div class="reply" id="replyMessage" role="status">Your smile is my favorite part of today 💖</div>
+      <div class="reply" id="replyMessage">Your smile is my favorite part of today 💖</div>
     </section>
 
-    <nav class="page-navigation" aria-label="Surprise pages">
+    <div class="page-nav">
       <button class="nav-button secondary" id="backButton" type="button" hidden>← Back</button>
       <button class="nav-button" id="nextButton" type="button">Next page →</button>
-    </nav>
+    </div>
   </main>
 
   <script>
@@ -383,67 +594,54 @@
     const pages = Array.from(document.querySelectorAll('.page'));
     const backButton = document.getElementById('backButton');
     const nextButton = document.getElementById('nextButton');
-    let opening = false;
+    const smileButton = document.getElementById('smileButton');
+    const replyMessage = document.getElementById('replyMessage');
+
     let currentPage = 0;
 
-    function updatePage(index) {
+    function updatePages(index) {
       currentPage = index;
-      pages.forEach((page, pageIndex) => {
-        const isCurrent = pageIndex === index;
-        page.classList.toggle('is-current', isCurrent);
-        page.setAttribute('aria-hidden', String(!isCurrent));
-      });
-
+      pages.forEach((page, i) => page.classList.toggle('current', i === index));
       backButton.hidden = index === 0;
-      nextButton.hidden = index === pages.length - 1;
-      if (index === pages.length - 1) {
-        nextButton.textContent = 'Finish';
-      } else {
-        nextButton.textContent = 'Next page →';
-      }
-      surprise.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      nextButton.textContent = index === pages.length - 1 ? 'Finish' : 'Next page →';
     }
 
     openButton.addEventListener('click', () => {
-      if (opening) return;
-      opening = true;
-      intro.classList.add('is-opening');
-      openButton.setAttribute('aria-label', 'Opening your letter and flower surprise');
-
-      // The envelope opens first; the letter rises, then the bouquet blooms.
-      window.setTimeout(() => {
-        intro.classList.add('is-leaving');
-        surprise.classList.add('is-visible');
-        window.setTimeout(() => {
-          intro.remove();
-          surprise.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 950);
-      }, 2900);
+      intro.classList.add('opening');
+      setTimeout(() => {
+        intro.classList.add('hidden');
+        surprise.classList.add('visible');
+        updatePages(0);
+      }, 2200);
     });
 
     nextButton.addEventListener('click', () => {
-      if (currentPage < pages.length - 1) updatePage(currentPage + 1);
+      if (currentPage < pages.length - 1) {
+        updatePages(currentPage + 1);
+      }
     });
 
     backButton.addEventListener('click', () => {
-      if (currentPage > 0) updatePage(currentPage - 1);
+      if (currentPage > 0) {
+        updatePages(currentPage - 1);
+      }
     });
 
-    document.getElementById('smileButton').addEventListener('click', () => {
-      document.getElementById('replyMessage').classList.add('is-visible');
+    smileButton.addEventListener('click', () => {
+      replyMessage.classList.add('show');
     });
 
-    document.getElementById('photoUpload').addEventListener('change', (event) => {
+    document.getElementById('photoUpload').addEventListener('change', function (event) {
       const file = event.target.files && event.target.files[0];
       if (!file || !file.type.startsWith('image/')) return;
-      const photo = document.getElementById('memoryPhoto');
-      const frame = document.getElementById('memoryFrame');
-      if (photo.dataset.objectUrl) URL.revokeObjectURL(photo.dataset.objectUrl);
-      const objectUrl = URL.createObjectURL(file);
-      photo.src = objectUrl;
-      photo.dataset.objectUrl = objectUrl;
-      photo.classList.add('has-photo');
-      frame.classList.add('has-photo');
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.getElementById('memoryPhoto');
+        img.src = e.target.result;
+        document.getElementById('memoryBox').classList.add('has-photo');
+      };
+      reader.readAsDataURL(file);
     });
   </script>
 </body>
