@@ -11,6 +11,7 @@
       --rose: #d94f83;
       --deep-rose: #9f315e;
       --ink: #493743;
+      --muted: #806a75;
     }
 
     * { box-sizing: border-box; }
@@ -24,7 +25,7 @@
       overflow-x: hidden;
     }
 
-    button { font: inherit; }
+    button, input { font: inherit; }
 
     .intro {
       position: fixed;
@@ -196,22 +197,22 @@
       100% { opacity: 1; transform: translate(-50%, 0) scale(1) rotate(0); }
     }
 
-    .open-button, .love-button {
+    .open-button, .nav-button {
       position: relative;
       z-index: 7;
       border: 0;
       border-radius: 999px;
-      padding: 15px 25px;
+      padding: 14px 23px;
       color: #fff;
       background: linear-gradient(135deg, #e879a2, #b84d7d);
-      box-shadow: 0 10px 24px rgba(184, 77, 125, .28);
+      box-shadow: 0 10px 24px rgba(184, 77, 125, .24);
       font: 700 1rem Arial, sans-serif;
       cursor: pointer;
       transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
     }
 
-    .open-button:hover, .love-button:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(184, 77, 125, .36); }
-    .open-button:focus-visible, .love-button:focus-visible { outline: 3px solid #672947; outline-offset: 4px; }
+    .open-button:hover, .nav-button:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(184, 77, 125, .32); }
+    .open-button:focus-visible, .nav-button:focus-visible, .upload-label:focus-within { outline: 3px solid #672947; outline-offset: 4px; }
     .intro.is-opening .open-button { opacity: 0; pointer-events: none; }
 
     .main-content {
@@ -229,11 +230,19 @@
     }
 
     .main-content.is-visible { opacity: 1; transform: translateY(0); }
+    .page { display: none; }
+    .page.is-current { display: block; animation: pageIn .55s ease both; }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(16px) scale(.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .page-count { margin: 0 0 15px; color: #a17b8a; font: 700 .8rem Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
     .main-heart { font: 3.5rem Arial, sans-serif; animation: heartbeat 1.6s ease-in-out infinite; }
     @keyframes heartbeat { 50% { transform: scale(1.13); } }
-
     .main-content h2 { margin: 12px 0 10px; color: var(--deep-rose); font-size: clamp(2rem, 7vw, 3rem); line-height: 1.12; }
-    .subtitle { margin: 0 0 24px; color: #806a75; font: 600 1rem/1.5 Arial, sans-serif; }
+    .subtitle { margin: 0 0 24px; color: var(--muted); font: 600 1rem/1.5 Arial, sans-serif; }
     .letter { padding: 22px; border-left: 5px solid #e879a2; border-radius: 14px; background: #fff4f7; text-align: left; }
     .letter p { margin: 0 0 13px; color: #4b3b44; font: 1rem/1.75 Arial, sans-serif; }
     .letter p:last-child { margin-bottom: 0; }
@@ -242,10 +251,47 @@
     .bouquet-final { margin: 10px 0 20px; font: 4.5rem/1 Arial, sans-serif; animation: sway 3s ease-in-out infinite; }
     @keyframes sway { 50% { transform: rotate(5deg) translateY(-5px); } }
     .signoff { color: #8a6878; font: italic 1rem Arial, sans-serif; }
-    .love-button { margin-top: 20px; }
+
+    .memory-frame {
+      width: min(340px, 100%);
+      aspect-ratio: 4 / 3;
+      margin: 20px auto 16px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 7px solid white;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #ffe5ee, #fff7ed);
+      box-shadow: 0 12px 32px rgba(137, 73, 99, .16);
+    }
+
+    .memory-frame img { display: none; width: 100%; height: 100%; object-fit: cover; }
+    .memory-frame img.has-photo { display: block; }
+    .memory-placeholder { padding: 20px; color: #a65c7b; font: 1rem/1.6 Arial, sans-serif; }
+    .memory-placeholder span { display: block; margin-bottom: 8px; font: 3rem Arial, sans-serif; }
+    .memory-frame.has-photo .memory-placeholder { display: none; }
+
+    .upload-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #e5afc3;
+      border-radius: 999px;
+      padding: 12px 18px;
+      color: #923d62;
+      background: #fff7fa;
+      font: 700 .95rem Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .upload-label input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+    .privacy-note { max-width: 390px; margin: 12px auto 0; color: #887783; font: .84rem/1.5 Arial, sans-serif; }
+
+    .page-navigation { display: flex; justify-content: center; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+    .nav-button.secondary { color: #873756; background: #f8eaf0; box-shadow: none; }
+    .nav-button[hidden] { display: none; }
     .reply { display: none; margin-top: 18px; padding: 17px; border: 1px solid #a6d9ac; border-radius: 14px; color: #315d3b; background: #effaf0; font: 700 1rem/1.5 Arial, sans-serif; }
-    .reply.is-visible { display: block; animation: reveal .5s ease both; }
-    @keyframes reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .reply.is-visible { display: block; animation: pageIn .5s ease both; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
@@ -255,6 +301,8 @@
       .intro-card { min-height: 500px; padding: 28px 18px 24px; }
       .gift-art { transform: scale(.9); margin-top: -3px; margin-bottom: 4px; }
       .main-content { margin: 16px auto; }
+      .page-navigation { gap: 9px; }
+      .nav-button { padding: 13px 17px; }
     }
   </style>
 </head>
@@ -278,28 +326,83 @@
     </div>
   </section>
 
-  <main class="main-content" id="surprise" aria-live="polite">
-    <div class="main-heart" aria-hidden="true">💖</div>
-    <h2>For Daisy Magar 🌷</h2>
-    <p class="subtitle">A little note for someone who makes ordinary days feel brighter.</p>
-    <section class="letter" aria-label="A note for Daisy">
-      <p>Hi Daisy,</p>
-      <p>I wanted to make you a little surprise, because getting to know you has made me smile more than I expected.</p>
-      <p>Your kindness, your energy, and the way you make even simple moments feel special mean a lot to me.</p>
-      <p>We’re still at the beginning of our story, and I don’t want to rush it. I’m just really happy we found each other, and I’m excited to make more lovely memories together. <span class="highlight">You’re someone special to me.</span></p>
+  <main class="main-content" id="surprise" aria-live="polite" aria-label="A surprise for Daisy">
+    <section class="page is-current" data-page="0" aria-labelledby="pageOneTitle">
+      <p class="page-count">A little note · 1 of 3</p>
+      <div class="main-heart" aria-hidden="true">💖</div>
+      <h2 id="pageOneTitle">For Daisy Magar 🌷</h2>
+      <p class="subtitle">A little note for someone who makes ordinary days feel brighter.</p>
+      <div class="letter">
+        <p>Hi Daisy,</p>
+        <p>I wanted to make you a little surprise, because getting to know you has made me smile more than I expected.</p>
+        <p>Your kindness, your energy, and the way you make even simple moments feel special mean a lot to me.</p>
+        <p>We’re still at the beginning of our story, and I don’t want to rush it. I’m just really happy we found each other, and I’m excited to make more lovely memories together. <span class="highlight">You’re someone special to me.</span></p>
+      </div>
+      <div class="love-note">I hope this little surprise makes you smile today 💕</div>
     </section>
-    <div class="love-note">I hope this little surprise makes you smile today 💕</div>
-    <div class="bouquet-final" aria-label="A bouquet of flowers">💐</div>
-    <p class="signoff">With lots of affection, just for you ✨</p>
-    <button class="love-button" id="smileButton" type="button">A little smile for you 💗</button>
-    <div class="reply" id="replyMessage" role="status">Your smile is my favorite part of today 🌸</div>
+
+    <section class="page" data-page="1" aria-labelledby="pageTwoTitle" aria-hidden="true">
+      <p class="page-count">A favorite memory · 2 of 3</p>
+      <h2 id="pageTwoTitle">A little memory of us 📸</h2>
+      <p class="subtitle">Add a photo you’d like to remember. This preview stays on this device.</p>
+      <div class="memory-frame" id="memoryFrame">
+        <div class="memory-placeholder"><span>🌸</span>Your favorite photo can go here</div>
+        <img id="memoryPhoto" alt="Your selected memory with Daisy" />
+      </div>
+      <label class="upload-label" for="photoUpload">Choose a photo 💗
+        <input id="photoUpload" type="file" accept="image/*" />
+      </label>
+      <p class="privacy-note">The photo is only previewed in your browser; this page does not upload or save it.</p>
+    </section>
+
+    <section class="page" data-page="2" aria-labelledby="pageThreeTitle" aria-hidden="true">
+      <p class="page-count">One last thing · 3 of 3</p>
+      <div class="main-heart" aria-hidden="true">💐</div>
+      <h2 id="pageThreeTitle">Here’s to more memories</h2>
+      <p class="subtitle">No big promises—just more laughter, kind moments, and getting to know each other.</p>
+      <div class="letter">
+        <p>Daisy, I’m glad you’re part of my life.</p>
+        <p>I hope this little surprise reminds you that you’re appreciated. Keep being your lovely self, and let’s take our story one happy moment at a time. ✨</p>
+      </div>
+      <div class="bouquet-final" aria-label="A bouquet of flowers">💐</div>
+      <p class="signoff">With lots of affection, just for you 💗</p>
+      <button class="nav-button" id="smileButton" type="button">A little smile for you 🌸</button>
+      <div class="reply" id="replyMessage" role="status">Your smile is my favorite part of today 💖</div>
+    </section>
+
+    <nav class="page-navigation" aria-label="Surprise pages">
+      <button class="nav-button secondary" id="backButton" type="button" hidden>← Back</button>
+      <button class="nav-button" id="nextButton" type="button">Next page →</button>
+    </nav>
   </main>
 
   <script>
     const intro = document.getElementById('intro');
     const surprise = document.getElementById('surprise');
     const openButton = document.getElementById('openButton');
+    const pages = Array.from(document.querySelectorAll('.page'));
+    const backButton = document.getElementById('backButton');
+    const nextButton = document.getElementById('nextButton');
     let opening = false;
+    let currentPage = 0;
+
+    function updatePage(index) {
+      currentPage = index;
+      pages.forEach((page, pageIndex) => {
+        const isCurrent = pageIndex === index;
+        page.classList.toggle('is-current', isCurrent);
+        page.setAttribute('aria-hidden', String(!isCurrent));
+      });
+
+      backButton.hidden = index === 0;
+      nextButton.hidden = index === pages.length - 1;
+      if (index === pages.length - 1) {
+        nextButton.textContent = 'Finish';
+      } else {
+        nextButton.textContent = 'Next page →';
+      }
+      surprise.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
     openButton.addEventListener('click', () => {
       if (opening) return;
@@ -307,16 +410,40 @@
       intro.classList.add('is-opening');
       openButton.setAttribute('aria-label', 'Opening your letter and flower surprise');
 
-      // The envelope opens first; the letter rises, then the bouquet blooms out.
+      // The envelope opens first; the letter rises, then the bouquet blooms.
       window.setTimeout(() => {
         intro.classList.add('is-leaving');
         surprise.classList.add('is-visible');
-        window.setTimeout(() => intro.remove(), 950);
+        window.setTimeout(() => {
+          intro.remove();
+          surprise.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 950);
       }, 2900);
+    });
+
+    nextButton.addEventListener('click', () => {
+      if (currentPage < pages.length - 1) updatePage(currentPage + 1);
+    });
+
+    backButton.addEventListener('click', () => {
+      if (currentPage > 0) updatePage(currentPage - 1);
     });
 
     document.getElementById('smileButton').addEventListener('click', () => {
       document.getElementById('replyMessage').classList.add('is-visible');
+    });
+
+    document.getElementById('photoUpload').addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      const photo = document.getElementById('memoryPhoto');
+      const frame = document.getElementById('memoryFrame');
+      if (photo.dataset.objectUrl) URL.revokeObjectURL(photo.dataset.objectUrl);
+      const objectUrl = URL.createObjectURL(file);
+      photo.src = objectUrl;
+      photo.dataset.objectUrl = objectUrl;
+      photo.classList.add('has-photo');
+      frame.classList.add('has-photo');
     });
   </script>
 </body>
