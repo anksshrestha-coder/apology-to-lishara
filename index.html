@@ -2,646 +2,459 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fff6f7" />
-  <title>For Daisy Magar 💐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#24151e" />
+  <title>A little surprise for Daisy 💐</title>
   <style>
     :root {
       --rose: #d94f83;
-      --deep-rose: #9f315e;
+      --deep-rose: #92345f;
       --ink: #493743;
       --muted: #806a75;
-      --page-bg: #fffafc;
+      --floral-bg: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1400&q=85');
     }
 
     * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      background: #fff7fa;
-      font-family: Arial, sans-serif;
-      color: var(--ink);
-    }
-
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
+    html, body { margin: 0; min-height: 100%; font-family: Arial, sans-serif; color: var(--ink); }
+    body { min-height: 100vh; min-height: 100svh; overflow-x: hidden; background: #f7e9ef; }
     button, input { font: inherit; }
 
     .intro {
       position: fixed;
       inset: 0;
-      z-index: 50;
+      z-index: 20;
       display: grid;
       place-items: center;
-      padding: 22px;
-      background: radial-gradient(circle at 50% 20%, #fffefa 0%, #fff4f1 42%, #f6e1ec 100%);
-      transition: opacity 0.9s ease, visibility 0.9s ease;
-    }
-
-    .intro.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .intro-card {
-      position: relative;
-      width: min(440px, 100%);
-      min-height: 540px;
-      background: rgba(255,255,255,0.74);
-      border: 1px solid rgba(208,133,153,0.2);
-      border-radius: 30px;
-      box-shadow: 0 25px 70px rgba(151,81,107,0.16);
       overflow: hidden;
+      color: white;
+      background-image: linear-gradient(180deg, rgba(28, 17, 26, .12) 0%, rgba(35, 18, 30, .1) 34%, rgba(31, 16, 29, .45) 100%), var(--floral-bg);
+      background-size: cover;
+      background-position: center;
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+
+    .intro::before, .surprise::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 232, 241, .16), rgba(96, 38, 72, .12));
+    }
+
+    .intro.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .topline {
+      position: absolute;
+      z-index: 2;
+      top: max(18px, env(safe-area-inset-top));
+      left: 20px;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font: 700 1rem Arial, sans-serif;
+      text-shadow: 0 2px 9px rgba(0,0,0,.35);
+    }
+
+    .topline .brand { font-size: 1.12rem; letter-spacing: .01em; }
+    .topline .sparkles { font-size: 1.45rem; }
+
+    .intro-content {
+      position: relative;
+      z-index: 1;
+      width: min(590px, 100%);
+      min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 82px 22px 112px;
       text-align: center;
-      padding: 30px 20px 24px;
     }
 
-    .intro-card::before, .intro-card::after {
-      content: "✦";
-      position: absolute;
-      color: rgba(216, 116, 160, 0.8);
-      font-size: 24px;
-      animation: twinkle 2.2s ease-in-out infinite;
+    .intro-label {
+      display: inline-block;
+      margin: 0 0 13px;
+      color: #b83e75;
+      font: italic 700 .9rem Georgia, serif;
+      letter-spacing: .1em;
+      text-transform: lowercase;
     }
 
-    .intro-card::before { top: 32px; left: 30px; }
-    .intro-card::after { right: 32px; bottom: 112px; animation-delay: .9s; }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.5; transform: scale(1) rotate(0); }
-      50% { opacity: 1; transform: scale(1.2) rotate(18deg); }
+    .title-card {
+      max-width: 550px;
+      padding: 17px 22px 19px;
+      border-radius: 22px;
+      color: #151115;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 15px 40px rgba(25, 10, 20, .17);
+      transform: rotate(-1deg);
     }
 
-    .eyebrow {
-      margin: 0 0 14px;
-      color: var(--rose);
-      font-style: italic;
-      letter-spacing: .08em;
-      font-size: 1rem;
-    }
-
-    .intro-title {
+    .title-card h1 {
       margin: 0;
-      font-size: clamp(2.5rem, 8vw, 3.8rem);
-      line-height: 0.98;
-      font-weight: 900;
-      letter-spacing: -0.05em;
-      color: #1d171b;
+      font: 900 clamp(2.15rem, 8.5vw, 4.1rem)/.98 Arial, sans-serif;
+      letter-spacing: -.055em;
     }
 
-    .intro-title .highlight { color: var(--rose); }
-
-    .intro-sub {
-      margin: 14px 0 18px;
-      color: #73636c;
-      font-size: 0.98rem;
-    }
+    .title-card h1 span { color: #bd3f78; }
+    .intro-copy { margin: 15px 0 0; color: white; font: 600 1rem/1.5 Arial, sans-serif; text-shadow: 0 2px 8px rgba(0,0,0,.42); }
 
     .gift-scene {
       position: relative;
-      width: 250px;
-      height: 180px;
-      margin: 0 auto 16px;
+      width: 270px;
+      height: 230px;
+      flex: 0 0 auto;
+      margin: 24px auto 10px;
+      perspective: 700px;
+      filter: drop-shadow(0 16px 18px rgba(37, 15, 25, .24));
     }
 
     .envelope {
       position: absolute;
-      left: 50%;
-      bottom: 10px;
-      width: 205px;
-      height: 118px;
-      transform: translateX(-50%);
-      background: linear-gradient(145deg, #f8dcb9, #ffedcf 60%, #ecc89f);
-      border-radius: 12px;
-      box-shadow: 0 14px 24px rgba(142,91,67,0.17);
       z-index: 2;
+      left: 50%;
+      bottom: 14px;
+      width: 238px;
+      height: 145px;
+      border-radius: 12px 12px 17px 17px;
+      background: linear-gradient(145deg, #f8dfc0, #ffedcf 58%, #e8c39b);
+      transform: translateX(-50%) rotate(-2deg);
     }
 
     .envelope-front {
       position: absolute;
+      z-index: 4;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(145deg, #f8dcb9, #f5d2a9);
-      clip-path: polygon(0 28%, 50% 72%, 100% 28%, 100% 100%, 0 100%);
+      background: linear-gradient(145deg, #fae3c4, #efcea7);
+      clip-path: polygon(0 25%, 50% 70%, 100% 25%, 100% 100%, 0 100%);
     }
 
     .envelope-flap {
       position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 72%;
-      background: linear-gradient(145deg, #ffedcf, #edc99d);
+      z-index: 5;
+      inset: 0 0 auto;
+      height: 74%;
+      background: linear-gradient(145deg, #fff1d8, #eac69c);
       clip-path: polygon(0 0, 100% 0, 50% 100%);
       transform-origin: top center;
-      transition: transform 0.75s ease;
-      z-index: 5;
+      transition: transform .75s ease;
+      backface-visibility: hidden;
     }
 
-    .envelope-seal {
+    .seal {
       position: absolute;
+      z-index: 6;
       left: 50%;
-      top: 47%;
-      transform: translate(-50%, -50%);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
+      top: 46%;
       display: grid;
       place-items: center;
+      width: 48px;
+      height: 48px;
+      transform: translate(-50%, -50%);
+      border: 3px solid rgba(255,255,255,.72);
+      border-radius: 50%;
+      color: #fff;
       background: linear-gradient(145deg, #ef8cae, #c94d7a);
-      border: 3px solid rgba(255,255,255,0.7);
-      box-shadow: 0 4px 10px rgba(151,54,91,0.25);
-      color: white;
-      font-size: 1.2rem;
-      z-index: 6;
-      transition: opacity .25s ease;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(151,54,91,.25);
+      transition: opacity .2s ease;
     }
 
-    .letter-card {
+    .letter {
       position: absolute;
+      z-index: 1;
       left: 50%;
-      bottom: 26px;
-      width: 170px;
-      height: 126px;
+      bottom: 34px;
+      width: 190px;
+      height: 148px;
+      padding: 21px 12px;
       transform: translateX(-50%);
-      padding: 16px 10px;
-      background: repeating-linear-gradient(white 0 21px, #f8e9ed 22px 23px);
-      border: 1px solid #f0d7dc;
+      border: 1px solid #efd6df;
       border-radius: 8px;
-      box-shadow: 0 5px 12px rgba(95,55,69,0.14);
       color: #8d4765;
-      transition: transform 0.85s cubic-bezier(.2,.8,.25,1), z-index 0s .4s;
+      background: repeating-linear-gradient(#fff 0 24px, #f8e9ed 25px 26px);
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(74,38,53,.17);
+      transition: transform .85s cubic-bezier(.2,.8,.25,1), z-index 0s .4s;
     }
 
-    .letter-card small {
-      display: block;
-      font: italic 0.7rem Arial, sans-serif;
-      color: #9b7282;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
+    .letter small { display: block; color: #9b7282; font: italic .72rem Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+    .letter strong { display: block; margin-top: 9px; color: var(--rose); font: 700 1.55rem Georgia, serif; }
+    .letter .tiny-stars { margin-top: 5px; color: #d4a246; }
 
-    .letter-card b {
-      display: block;
-      margin-top: 8px;
-      color: var(--rose);
-      font-size: 1.45rem;
-    }
-
-    .letter-card .mini-heart {
-      margin-top: 6px;
-      font-size: 1.05rem;
-    }
-
-    .bouquet-pop {
+    .flower {
       position: absolute;
+      z-index: 3;
       left: 50%;
-      bottom: 72px;
-      transform: translateX(-50%) scale(0.25);
+      bottom: 103px;
       opacity: 0;
-      font-size: 88px;
-      filter: drop-shadow(0 8px 7px rgba(122,76,80,0.18));
-      z-index: 3;
+      transform: translate(-50%, 32px) scale(.2);
+      transform-origin: bottom center;
+      font: 5.7rem/1 Arial, sans-serif;
+      filter: drop-shadow(0 8px 8px rgba(72,34,52,.2));
     }
 
-    .intro.opening .envelope-flap {
-      transform: rotateX(180deg);
-    }
+    .intro.opening .envelope-flap { transform: rotateX(180deg); }
+    .intro.opening .seal { opacity: 0; }
+    .intro.opening .letter { z-index: 3; transform: translate(-50%, -90px) rotate(-4deg); }
+    .intro.opening .flower { animation: bloom 1.15s .82s cubic-bezier(.2,.8,.25,1) forwards; }
 
-    .intro.opening .envelope-seal {
-      opacity: 0;
-    }
-
-    .intro.opening .letter-card {
-      transform: translateX(-50%) translateY(-85px) rotate(-4deg);
-      z-index: 3;
-    }
-
-    .intro.opening .bouquet-pop {
-      animation: flowerBloom 1.2s .8s cubic-bezier(.2,.8,.25,1) forwards;
-    }
-
-    @keyframes flowerBloom {
-      0% {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.2) rotate(-14deg);
-      }
-      65% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1.12) rotate(8deg);
-      }
-      82% {
-        transform: translateX(-50%) scale(0.97) rotate(-3deg);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1) rotate(0deg);
-      }
+    @keyframes bloom {
+      0% { opacity: 0; transform: translate(-50%, 32px) scale(.2) rotate(-14deg); }
+      65% { opacity: 1; transform: translate(-50%, -16px) scale(1.13) rotate(7deg); }
+      82% { transform: translate(-50%, 5px) scale(.96) rotate(-3deg); }
+      100% { opacity: 1; transform: translate(-50%, 0) scale(1) rotate(0); }
     }
 
     .open-button, .nav-button {
       position: relative;
       z-index: 7;
-      border: none;
+      border: 1px solid rgba(255,255,255,.58);
       border-radius: 999px;
-      padding: 14px 23px;
+      padding: 15px 25px;
       color: white;
       background: linear-gradient(135deg, #e879a2, #b84d7d);
-      box-shadow: 0 12px 26px rgba(184,77,125,0.26);
+      box-shadow: 0 10px 24px rgba(79,24,51,.24);
+      font: 700 1rem Arial, sans-serif;
       cursor: pointer;
-      font-weight: 700;
       transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
     }
 
-    .open-button:hover, .nav-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 30px rgba(184,77,125,0.32);
+    .open-button:hover, .nav-button:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(79,24,51,.32); }
+    .open-button:focus-visible, .nav-button:focus-visible, .upload-label:focus-within { outline: 3px solid #672947; outline-offset: 4px; }
+    .intro.opening .open-button { opacity: 0; pointer-events: none; }
+
+    .intro-footer {
+      position: absolute;
+      z-index: 2;
+      bottom: max(22px, env(safe-area-inset-bottom));
+      left: 20px;
+      right: 20px;
+      color: white;
+      text-align: left;
+      text-shadow: 0 2px 8px rgba(0,0,0,.55);
     }
 
-    .intro.opening .open-button {
-      opacity: 0;
-      pointer-events: none;
-    }
+    .creator { display: flex; align-items: center; gap: 10px; font: 700 1rem Arial, sans-serif; }
+    .avatar { display: grid; place-items: center; width: 42px; height: 42px; border: 2px solid white; border-radius: 50%; background: #f4c6d8; font-size: 1.3rem; text-shadow: none; }
+    .caption { margin-top: 11px; font-size: .92rem; line-height: 1.35; }
 
     .surprise {
-      width: min(760px, calc(100% - 32px));
-      margin: 26px auto 42px;
-      padding: clamp(20px, 5vw, 40px);
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(214,143,166,0.22);
-      border-radius: 28px;
-      box-shadow: 0 24px 70px rgba(137,73,99,0.12);
-      text-align: center;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.9s ease, transform 0.9s ease;
-      display: none;
-    }
-
-    .surprise.visible {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.current {
-      display: block;
-      animation: pageIn 0.5s ease both;
-    }
-
-    @keyframes pageIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .page-count {
-      margin: 0 0 14px;
-      color: #a17b8a;
-      font: 700 0.75rem Arial, sans-serif;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .heart {
-      font-size: 3.2rem;
-      animation: heartbeat 1.6s ease-in-out infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.13); }
-    }
-
-    .main-title {
-      margin: 12px 0 10px;
-      color: var(--deep-rose);
-      font-size: clamp(2rem, 7vw, 3rem);
-      line-height: 1.12;
-    }
-
-    .subtitle {
-      margin: 0 0 22px;
-      color: var(--muted);
-      font: 600 1rem/1.5 Arial, sans-serif;
-    }
-
-    .letter-box {
-      padding: 22px;
-      border-left: 5px solid #e879a2;
-      border-radius: 14px;
-      background: #fff4f7;
-      text-align: left;
-    }
-
-    .letter-box p {
-      margin: 0 0 13px;
-      color: #4b3b44;
-      font: 1rem/1.75 Arial, sans-serif;
-    }
-
-    .letter-box p:last-child { margin-bottom: 0; }
-
-    .highlight {
-      color: #c33f72;
-      font-weight: 700;
-    }
-
-    .love-note {
-      margin: 22px 0 12px;
-      padding: 18px 14px;
-      border-radius: 16px;
-      color: #873756;
-      background: #ffe6ef;
-      font: 700 1.1rem/1.5 Arial, sans-serif;
-    }
-
-    .flower-final {
-      margin: 10px 0 16px;
-      font-size: clamp(3rem, 8vw, 5rem);
-      animation: sway 3s ease-in-out infinite;
-    }
-
-    @keyframes sway {
-      0%, 100% { transform: rotate(-3deg) translateY(0); }
-      50% { transform: rotate(6deg) translateY(-4px); }
-    }
-
-    .signature {
-      color: #8a6878;
-      font-style: italic;
-      font-size: 1rem;
-    }
-
-    .memory-box {
-      width: min(360px, 100%);
-      aspect-ratio: 4 / 3;
-      margin: 18px auto 12px;
-      border: 7px solid white;
-      border-radius: 22px;
-      background: linear-gradient(145deg, #ffe9f2, #fff8ea);
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
       display: grid;
       place-items: center;
-      box-shadow: 0 12px 30px rgba(137,73,99,0.12);
       overflow: hidden;
+      padding: 28px 16px;
+      background-image: linear-gradient(180deg, rgba(255,246,250,.66), rgba(255,237,245,.8)), var(--floral-bg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .surprise::before { background: rgba(255,255,255,.13); }
+
+    .story-card {
       position: relative;
-    }
-
-    .memory-box img {
-      display: none;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .memory-box.has-photo img {
-      display: block;
-    }
-
-    .memory-placeholder {
-      color: #9d5974;
-      font: 1rem/1.6 Arial, sans-serif;
+      z-index: 1;
+      width: min(720px, 100%);
+      max-height: calc(100svh - 44px);
+      overflow-y: auto;
+      padding: clamp(22px, 5vw, 40px);
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 28px;
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 24px 70px rgba(80,34,56,.2);
       text-align: center;
-      padding: 18px;
-    }
-
-    .memory-placeholder span {
-      display: block;
-      font-size: 3rem;
-      margin-bottom: 8px;
-    }
-
-    .memory-box.has-photo .memory-placeholder {
-      display: none;
-    }
-
-    .upload-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: #fff7fa;
-      border: 1px solid #ebc0d3;
-      color: #8c3d63;
-      font-weight: 700;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .upload-label input {
-      position: absolute;
-      inset: 0;
       opacity: 0;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
+      transform: translateY(18px) scale(.98);
+      transition: opacity .75s ease, transform .75s ease;
+      scrollbar-width: thin;
+      scrollbar-color: #dfa2ba transparent;
     }
 
-    .upload-note {
-      margin: 12px auto 0;
-      max-width: 420px;
-      color: #86747a;
-      font-size: 0.84rem;
-      line-height: 1.5;
-    }
+    .story-card.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .page { display: none; }
+    .page.current { display: block; animation: pageIn .5s ease both; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .page-count { margin: 0 0 14px; color: #a17b8a; font: 700 .75rem Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    .heart { font-size: 3rem; animation: pulse 1.7s ease-in-out infinite; }
+    @keyframes pulse { 50% { transform: scale(1.12); } }
+    .main-title { margin: 12px 0 10px; color: var(--deep-rose); font: 800 clamp(2rem, 7vw, 3rem)/1.12 Georgia, serif; }
+    .subtitle { margin: 0 0 22px; color: var(--muted); font: 600 1rem/1.5 Arial, sans-serif; }
+    .message { padding: 22px; border-left: 5px solid #e879a2; border-radius: 14px; background: #fff4f7; text-align: left; }
+    .message p { margin: 0 0 13px; color: #4b3b44; font: 1rem/1.75 Arial, sans-serif; }
+    .message p:last-child { margin-bottom: 0; }
+    .highlight { color: #c33f72; font-weight: 700; }
+    .love-note { margin: 22px 0 12px; padding: 17px; border-radius: 16px; color: #873756; background: #ffe6ef; font: 700 1.05rem/1.5 Arial, sans-serif; }
+    .flower-final { margin: 10px 0 18px; font: 4.5rem/1 Arial, sans-serif; animation: sway 3s ease-in-out infinite; }
+    @keyframes sway { 50% { transform: rotate(5deg) translateY(-5px); } }
+    .signature { color: #8a6878; font: italic 1rem Georgia, serif; }
 
-    .page-nav {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 26px;
-    }
+    .memory-frame { width: min(360px, 100%); aspect-ratio: 4/3; margin: 18px auto 13px; display: grid; place-items: center; overflow: hidden; border: 7px solid white; border-radius: 20px; background: linear-gradient(145deg, #ffe9f2, #fff8ea); box-shadow: 0 12px 30px rgba(137,73,99,.16); }
+    .memory-frame img { display: none; width: 100%; height: 100%; object-fit: cover; }
+    .memory-frame img.has-photo { display: block; }
+    .memory-placeholder { padding: 18px; color: #9d5974; font: 1rem/1.6 Arial, sans-serif; }
+    .memory-placeholder span { display: block; margin-bottom: 8px; font-size: 3rem; }
+    .memory-frame.has-photo .memory-placeholder { display: none; }
+    .upload-label { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; border: 1px solid #ebc0d3; border-radius: 999px; color: #8c3d63; background: #fff7fa; font: 700 .95rem Arial, sans-serif; cursor: pointer; }
+    .upload-label input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .upload-note { max-width: 420px; margin: 12px auto 0; color: #86747a; font: .84rem/1.5 Arial, sans-serif; }
+    .page-nav { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+    .nav-button.secondary { color: #873756; border-color: #f0d7e1; background: #f8eaf0; box-shadow: none; }
+    .nav-button[hidden] { display: none; }
+    .reply { display: none; margin-top: 16px; padding: 15px; border: 1px solid #a6d9ac; border-radius: 14px; color: #315d3b; background: #effaf0; font: 700 1rem/1.5 Arial, sans-serif; }
+    .reply.visible { display: block; animation: pageIn .45s ease both; }
 
-    .nav-button.secondary {
-      color: #873756;
-      background: #f8eaf0;
-      box-shadow: none;
-    }
-
-    .reply {
-      display: none;
-      margin-top: 18px;
-      padding: 17px;
-      border-radius: 12px;
-      border: 1px solid #a6d9ac;
-      background: #effaf0;
-      color: #2d6546;
-      font-weight: 700;
-      line-height: 1.5;
-    }
-
-    .reply.show {
-      display: block;
-      animation: reveal 0.5s ease both;
-    }
-
-    @keyframes reveal {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 480px) {
-      .intro-card { min-height: 500px; }
-      .gift-scene { transform: scale(0.9); }
+    @media (max-width: 520px) {
+      .intro-content { padding: 86px 16px 115px; }
+      .title-card { padding: 14px 16px 16px; }
+      .gift-scene { transform: scale(.9); margin-top: 15px; margin-bottom: 0; }
+      .intro-copy { margin-top: 12px; }
+      .story-card { max-height: calc(100svh - 30px); padding: 22px 17px; border-radius: 23px; }
+      .message { padding: 18px 16px; }
       .page-nav { gap: 9px; }
-      .nav-button { padding: 12px 16px; }
+      .nav-button { padding: 13px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
 <body>
-  <div class="intro" id="intro">
-    <div class="intro-card">
-      <p class="eyebrow">a little something ✨</p>
-      <h1 class="intro-title">There’s something<br><span class="highlight">for you</span></h1>
-      <p class="intro-sub">A tiny surprise, made with a lot of care.</p>
-
+  <section class="intro" id="intro" aria-label="Daisy's surprise">
+    <div class="topline"><span class="brand">a surprise for Daisy</span><span class="sparkles" aria-hidden="true">♡ ✦</span></div>
+    <div class="intro-content">
+      <p class="intro-label">a little something ✨</p>
+      <div class="title-card"><h1>There’s something<br><span>for you</span></h1></div>
+      <p class="intro-copy">A tiny surprise, made with a lot of care.</p>
       <div class="gift-scene" aria-hidden="true">
         <div class="envelope">
-          <div class="letter-card">
-            <small>a little note</small>
-            <b>Daisy</b>
-            <div class="mini-heart">✦ ♡ ✦</div>
-          </div>
+          <div class="letter"><small>a little note</small><strong>Daisy</strong><div class="tiny-stars">✦ ✧ ✦</div></div>
           <div class="envelope-front"></div>
           <div class="envelope-flap"></div>
-          <div class="envelope-seal">♡</div>
+          <div class="seal">♡</div>
         </div>
-        <div class="bouquet-pop">💐</div>
+        <div class="flower">💐</div>
       </div>
-
-      <button class="open-button" id="openButton" type="button">♡ Open your letter ✨</button>
-      <p class="eyebrow" style="margin-top: 16px; color: #987b87;">made just for Daisy Magar</p>
+      <button class="open-button" id="openButton" type="button">♡ &nbsp; Open your surprise ✨</button>
     </div>
-  </div>
-
-  <main class="surprise" id="surprise">
-    <section class="page current" data-page="0">
-      <p class="page-count">A little note · 1 of 3</p>
-      <div class="heart">💖</div>
-      <h2 class="main-title">For Daisy Magar 🌷</h2>
-      <p class="subtitle">A little note for someone who makes ordinary days feel brighter.</p>
-
-      <div class="letter-box">
-        <p>Hi Daisy,</p>
-        <p>I wanted to make you a little surprise, because getting to know you has made me smile more than I expected.</p>
-        <p>Your kindness, your energy, and the way you make even simple moments feel special mean a lot to me.</p>
-        <p>We’re still at the beginning of our story, and I don’t want to rush it. I’m just really happy we found each other, and I’m excited to make more lovely memories together. <span class="highlight">You’re someone special to me.</span></p>
-      </div>
-
-      <div class="love-note">I hope this little surprise makes you smile today 💕</div>
-    </section>
-
-    <section class="page" data-page="1">
-      <p class="page-count">A favorite memory · 2 of 3</p>
-      <h2 class="main-title">A little memory of us 📸</h2>
-      <p class="subtitle">Add a photo you’d like to remember with Daisy.</p>
-
-      <div class="memory-box" id="memoryBox">
-        <div class="memory-placeholder"><span>🌸</span>Your favorite photo can go here</div>
-        <img id="memoryPhoto" alt="Memory with Daisy" />
-      </div>
-
-      <label class="upload-label" for="photoUpload">
-        Choose a photo 💗
-        <input id="photoUpload" type="file" accept="image/*" />
-      </label>
-
-      <p class="upload-note">This preview is local to your browser and does not upload anywhere.</p>
-    </section>
-
-    <section class="page" data-page="2">
-      <p class="page-count">One last thing · 3 of 3</p>
-      <div class="heart">💐</div>
-      <h2 class="main-title">Here’s to more memories</h2>
-      <p class="subtitle">No big promises—just more laughter, sweetness, and us.</p>
-
-      <div class="letter-box">
-        <p>Daisy, I’m glad you’re part of my life.</p>
-        <p>I hope this little surprise reminds you that you’re appreciated. Keep being your lovely self and let’s take our story one happy moment at a time. ✨</p>
-      </div>
-
-      <div class="flower-final">💐</div>
-      <p class="signature">With lots of affection, just for you 💗</p>
-
-      <button class="nav-button" id="smileButton" type="button">A little smile for you 🌸</button>
-      <div class="reply" id="replyMessage">Your smile is my favorite part of today 💖</div>
-    </section>
-
-    <div class="page-nav">
-      <button class="nav-button secondary" id="backButton" type="button" hidden>← Back</button>
-      <button class="nav-button" id="nextButton" type="button">Next page →</button>
+    <div class="intro-footer">
+      <div class="creator"><span class="avatar" aria-hidden="true">💗</span><span>Made with love for Daisy Magar</span></div>
+      <div class="caption">Some people deserve a little more than an ordinary message… 🌸</div>
     </div>
+  </section>
+
+  <main class="surprise" id="surprise" aria-label="Daisy's surprise pages">
+    <article class="story-card" id="storyCard">
+      <section class="page current" data-page="0" aria-label="A little note, page one">
+        <p class="page-count">A little note · 1 of 3</p>
+        <div class="heart" aria-hidden="true">💖</div>
+        <h2 class="main-title">For Daisy Magar 🌷</h2>
+        <p class="subtitle">A little note for someone who makes ordinary days feel brighter.</p>
+        <div class="message">
+          <p>Hi Daisy,</p>
+          <p>I wanted to make you a little surprise, because getting to know you has made me smile more than I expected.</p>
+          <p>Your kindness, your energy, and the way you make even simple moments feel special mean a lot to me.</p>
+          <p>We’re still at the beginning of our story, and I don’t want to rush it. I’m just really happy we found each other, and I’m excited to make more lovely memories together. <span class="highlight">You’re someone special to me.</span></p>
+        </div>
+        <div class="love-note">I hope this little surprise makes you smile today 💕</div>
+      </section>
+
+      <section class="page" data-page="1" aria-label="A memory page">
+        <p class="page-count">A favorite memory · 2 of 3</p>
+        <h2 class="main-title">A little memory of us 📸</h2>
+        <p class="subtitle">Add a photo you’d like to remember with Daisy.</p>
+        <div class="memory-frame" id="memoryFrame">
+          <div class="memory-placeholder"><span>🌸</span>Your favorite photo can go here</div>
+          <img id="memoryPhoto" alt="Your selected memory with Daisy" />
+        </div>
+        <label class="upload-label" for="photoUpload">Choose a photo 💗
+          <input id="photoUpload" type="file" accept="image/*" />
+        </label>
+        <p class="upload-note">The photo is previewed only in this browser; this page does not upload it.</p>
+      </section>
+
+      <section class="page" data-page="2" aria-label="The final message">
+        <p class="page-count">One last thing · 3 of 3</p>
+        <div class="heart" aria-hidden="true">💐</div>
+        <h2 class="main-title">Here’s to more memories</h2>
+        <p class="subtitle">No big promises—just more laughter, kind moments, and getting to know each other.</p>
+        <div class="message">
+          <p>Daisy, I’m glad you’re part of my life.</p>
+          <p>I hope this little surprise reminds you that you’re appreciated. Keep being your lovely self, and let’s take our story one happy moment at a time. ✨</p>
+        </div>
+        <div class="flower-final" aria-label="A bouquet of flowers">💐</div>
+        <p class="signature">With lots of affection, just for you 💗</p>
+        <button class="nav-button" id="smileButton" type="button">A little smile for you 🌸</button>
+        <div class="reply" id="replyMessage" role="status">Your smile is my favorite part of today 💖</div>
+      </section>
+
+      <nav class="page-nav" aria-label="Surprise navigation">
+        <button class="nav-button secondary" id="backButton" type="button" hidden>← Back</button>
+        <button class="nav-button" id="nextButton" type="button">Next page →</button>
+      </nav>
+    </article>
   </main>
 
   <script>
     const intro = document.getElementById('intro');
-    const surprise = document.getElementById('surprise');
-    const openButton = document.getElementById('openButton');
+    const storyCard = document.getElementById('storyCard');
     const pages = Array.from(document.querySelectorAll('.page'));
+    const openButton = document.getElementById('openButton');
     const backButton = document.getElementById('backButton');
     const nextButton = document.getElementById('nextButton');
-    const smileButton = document.getElementById('smileButton');
-    const replyMessage = document.getElementById('replyMessage');
-
     let currentPage = 0;
+    let opening = false;
 
-    function updatePages(index) {
+    function updatePage(index) {
       currentPage = index;
-      pages.forEach((page, i) => page.classList.toggle('current', i === index));
+      pages.forEach((page, i) => {
+        page.classList.toggle('current', i === index);
+        page.setAttribute('aria-hidden', String(i !== index));
+      });
       backButton.hidden = index === 0;
-      nextButton.textContent = index === pages.length - 1 ? 'Finish' : 'Next page →';
+      nextButton.textContent = index === pages.length - 1 ? 'The end 💗' : 'Next page →';
+      storyCard.scrollTop = 0;
     }
 
     openButton.addEventListener('click', () => {
+      if (opening) return;
+      opening = true;
       intro.classList.add('opening');
-      setTimeout(() => {
-        intro.classList.add('hidden');
-        surprise.classList.add('visible');
-        updatePages(0);
-      }, 2200);
+      window.setTimeout(() => {
+        intro.classList.add('is-leaving');
+        storyCard.classList.add('visible');
+        window.setTimeout(() => intro.remove(), 850);
+      }, 2400);
     });
 
     nextButton.addEventListener('click', () => {
-      if (currentPage < pages.length - 1) {
-        updatePages(currentPage + 1);
-      }
+      if (currentPage < pages.length - 1) updatePage(currentPage + 1);
     });
 
     backButton.addEventListener('click', () => {
-      if (currentPage > 0) {
-        updatePages(currentPage - 1);
-      }
+      if (currentPage > 0) updatePage(currentPage - 1);
     });
 
-    smileButton.addEventListener('click', () => {
-      replyMessage.classList.add('show');
+    document.getElementById('smileButton').addEventListener('click', () => {
+      document.getElementById('replyMessage').classList.add('visible');
     });
 
-    document.getElementById('photoUpload').addEventListener('change', function (event) {
+    document.getElementById('photoUpload').addEventListener('change', (event) => {
       const file = event.target.files && event.target.files[0];
       if (!file || !file.type.startsWith('image/')) return;
-
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.getElementById('memoryPhoto');
-        img.src = e.target.result;
-        document.getElementById('memoryBox').classList.add('has-photo');
-      };
-      reader.readAsDataURL(file);
+      const photo = document.getElementById('memoryPhoto');
+      if (photo.dataset.url) URL.revokeObjectURL(photo.dataset.url);
+      photo.dataset.url = URL.createObjectURL(file);
+      photo.src = photo.dataset.url;
+      photo.classList.add('has-photo');
+      document.getElementById('memoryFrame').classList.add('has-photo');
     });
   </script>
 </body>
